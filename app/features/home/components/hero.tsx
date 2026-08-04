@@ -7,26 +7,26 @@ const Hero = () => {
     "rounded-xl px-3 py-1.5 flex items-center gap-1.5 text-sm shadow-2xs cursor-pointer transition-colors duration-250";
 
   return (
-    <AnimateSection className="space-y-5">
+    <AnimateSection className="py-10">
       <div>
         <p className="font-caveat text-2xl">Hi, I'm Rikky Mahendra</p>
-        <h1 className="text-4xl leading-none font-medium text-pretty">
+        <h1 className="text-3xl leading-none font-medium text-pretty md:text-4xl lg:text-5xl">
           Full Stack Engineer Crafting Modern Web Experiences.
         </h1>
       </div>
-      <div className="space-y-4 pr-32.5 text-lg text-pretty">
-        <p>
+      <div className="font-light text-balance xl:text-lg">
+        <p className="pt-4">
           I design and develop modern web applications that balance performance,
           scalability, and simplicity. My goal is to create digital experiences
           that are intuitive for users and maintainable for developers.
         </p>
-        <p>
+        <p className="pt-2">
           Driven by curiosity and continuous learning. I enjoy transforming
           ideas into reliable software through clean architecture and thoughtful
           engineering.
         </p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="inline-flex flex-wrap items-center gap-2 pt-4 whitespace-nowrap">
         <button
           type="button"
           className={cn(

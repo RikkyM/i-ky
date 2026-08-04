@@ -17,17 +17,16 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <AnimateContainer className="space-y-12.5 pt-25 font-sans">
-{/* <div className="sticky inset-x-0 h-20 bg-red-500 top-0"></div> */}
+    <AnimateContainer className="font-sans">
       <Hero />
-
-      <Suspense fallback={null}>
-        <GithubContribution />
-      </Suspense>
 
       <Projects />
 
       <Skills />
+
+      <Suspense fallback={null}>
+        <GithubContribution />
+      </Suspense>
     </AnimateContainer>
   );
 }

@@ -9,10 +9,10 @@ const Projects = () => {
   const { locale } = useOutletContext<{ locale: string }>();
 
   const projectIconClass =
-    "opacity-0 transition-opacity duration-250 group-hover/icon:opacity-100";
+    "sm:opacity-0 transition-opacity duration-250 group-hover/icon:opacity-100";
 
   return (
-    <AnimateSection>
+    <AnimateSection className="py-10">
       <div className="space-y-2">
         <h1 className="text-2xl font-medium">Projects</h1>
         <p className="text-sm font-light">
@@ -23,9 +23,13 @@ const Projects = () => {
       <div className="group/projects divide-y divide-[#a0a0a0]/40">
         {projects.map((project) => {
           return (
-            <div key={project.title}>
-              <div className="group/icon flex items-center gap-17 py-7 transition-opacity duration-250 group-hover/projects:opacity-40 hover:opacity-100">
-                <p className="text-sm whitespace-nowrap text-[#737373]">
+            <div key={project.title} className="">
+              <div
+                className={cn(
+                  "group/icon sm:gap-x8 grid gap-y-1.5 py-6 transition-opacity duration-250 group-hover/projects:opacity-40 hover:opacity-100 sm:grid-cols-[11rem_1fr]",
+                )}
+              >
+                <p className="text-sm text-[#737373]">
                   {formatDuration(
                     project.duration.start,
                     project.duration.end,
@@ -34,7 +38,7 @@ const Projects = () => {
                 </p>
                 <div className="flex flex-col gap-1.5 text-pretty">
                   {project.private ? (
-                    <h2 className="flex w-max gap-1 text-sm font-medium">
+                    <h2 className="flex gap-1 text-sm font-medium text-balance">
                       <span>{project.title}</span>
                       <div className={cn(projectIconClass)}>
                         <Lock className="size-2.5" />
@@ -45,7 +49,7 @@ const Projects = () => {
                       href={project?.link}
                       target="_blank"
                       className={cn(
-                        "flex w-max gap-0.5 text-sm font-medium",
+                        "flex gap-0.5 text-sm font-medium",
                         "hover:underline",
                       )}
                     >

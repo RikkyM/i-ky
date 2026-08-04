@@ -35,7 +35,7 @@ export const skills: Skills[] = [
     list: [
       {
         icon: Php,
-        sizeIcon: "30",
+        sizeIcon: "28",
         name: "PHP",
       },
       {

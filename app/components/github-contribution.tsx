@@ -1,4 +1,5 @@
 import {
+  autoUpdate,
   FloatingPortal,
   offset,
   shift,
@@ -39,8 +40,10 @@ export default function GithuvContribution() {
   const { refs, floatingStyles, context } = useFloating({
     open,
     onOpenChange: setOpen,
+    transform: false,
     placement: "top",
-    middleware: [offset(8), shift()],
+    whileElementsMounted: autoUpdate,
+    middleware: [offset(4), shift()],
   });
 
   const hover = useHover(context, { delay: 0 });
@@ -99,7 +102,7 @@ export default function GithuvContribution() {
   return (
     <AnimateSection
       className={cn(
-        "relative space-y-0.5",
+        "relative space-y-0.5 py-10",
         "before:pointer-events-none before:absolute before:top-0 before:bottom-5 before:left-0 before:z-10 before:w-4 before:bg-linear-to-r before:from-[#FBFAF9]",
         "after:pointer-events-none after:absolute after:top-0 after:right-0 after:bottom-5 after:z-10 after:w-4 after:bg-linear-to-l after:from-[#FBFAF9]",
       )}
@@ -118,7 +121,7 @@ export default function GithuvContribution() {
                   left: `${item.column * 14}px`,
                 }}
               >
-                {dayjs(item.date).locale(locale).format('MMM')}
+                {dayjs(item.date).locale(locale).format("MMM")}
               </span>
             ))}
           </div>
@@ -144,24 +147,25 @@ export default function GithuvContribution() {
               />
             ))}
             <FloatingPortal>
-              {open && active && (
-                <div
-                  ref={refs.setFloating}
-                  style={floatingStyles}
-                  {...getFloatingProps()}
-                  className="rounded-md bg-neutral-900 px-3 py-2 text-xs text-white shadow-lg"
-                >
-                  {active.count} contributions on{" "}
-                  {dayjs(active.date).format("DD.MM.YY")}
-                </div>
-              )}
+              <div
+                ref={refs.setFloating}
+                style={floatingStyles}
+                {...getFloatingProps()}
+                className={cn(
+                  "origin-bottom rounded-md bg-neutral-900 px-3 py-2 text-xs text-white shadow-lg transition-[opacity,scale]",
+                  open ? "scale-100" : "scale-90 opacity-0",
+                )}
+              >
+                {active?.count} contributions on{" "}
+                {dayjs(active?.date).format("DD.MM.YY")}
+              </div>
             </FloatingPortal>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="mx-auto flex flex-wrap items-center justify-between gap-2.5 px-3 text-xs whitespace-nowrap text-[#737373]">
+      <div className="mx-auto flex flex-wrap items-center justify-between gap-2.5 px-3 text-xs text-[#737373]">
         <span>{total} contributions in the past 365 days.</span>
         <div className="flex flex-1 items-center justify-end">
           <span>Less</span>

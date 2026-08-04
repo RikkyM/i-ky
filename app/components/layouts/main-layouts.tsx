@@ -41,7 +41,7 @@ export const MainLayout = () => {
   };
 
   return (
-    <main className="mx-auto h-dvh max-h-full w-full scrollbar-none overflow-y-auto overflow-x-hidden bg-[#FBFAF9] subpixel-antialiased">
+    <main className="mx-auto h-dvh w-full scrollbar-none overflow-y-auto bg-[#FBFAF9] subpixel-antialiased">
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
@@ -50,7 +50,7 @@ export const MainLayout = () => {
           transition={{
             ease: "easeIn",
           }}
-          className="mx-auto max-w-3xl"
+          className="mx-auto max-w-3xl max-lg:w-[87%]"
         >
           {outlet}
         </motion.div>
