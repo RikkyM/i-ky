@@ -6,7 +6,10 @@ type Projects = {
   title: string;
   description: string;
   private: boolean;
-  link?: string;
+  link?: {
+    web?: string;
+    repo?: string;
+  };
 };
 
 export const projects: Projects[] = [
@@ -49,7 +52,10 @@ export const projects: Projects[] = [
     description:
       "Simple note-taking application for organizing tasks and personal notes.",
     private: false,
-    link: "https://www.github.com/RikkyM/inMemo",
+    link: {
+      web: "https://inmemo.vercel.app/",
+      repo: "https://github.com/RikkyM/inMemo",
+    },
   },
   {
     duration: {
@@ -60,7 +66,10 @@ export const projects: Projects[] = [
     description:
       "Whatsapp-based sales application for managing orders and customer interactions.",
     private: false,
-    link: "https://www.github.com/RikkyM/lumina-crisp",
+    link: {
+      web: "https://lumina-crisp.vercel.app/",
+      repo: "https://github.com/RikkyM/lumina-crisp",
+    },
   },
   {
     duration: {
@@ -71,6 +80,8 @@ export const projects: Projects[] = [
     description:
       "Tourism web application showcasing destinations and travel information for Konawe.",
     private: false,
-    link: "https://github.com/RikkyM/konawe-tourism",
+    link: {
+      repo: "https://github.com/RikkyM/konawe-tourism",
+    },
   },
 ];

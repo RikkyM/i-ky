@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import AnimateContainer from "~/components/animate-container";
 import Hero from "~/features/home/components/hero";
 import Projects from "~/features/home/components/projects";
 import Skills from "~/features/home/components/skills";
@@ -17,7 +16,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   return (
-    <AnimateContainer className="font-sans">
+    <>
       <Hero />
 
       <Projects />
@@ -27,6 +26,6 @@ export default function Home() {
       <Suspense fallback={null}>
         <GithubContribution />
       </Suspense>
-    </AnimateContainer>
+    </>
   );
 }

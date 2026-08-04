@@ -1,8 +1,8 @@
 import {
-  autoUpdate,
   FloatingPortal,
   offset,
   shift,
+  useDismiss,
   useFloating,
   useHover,
   useInteractions,
@@ -13,6 +13,7 @@ import { Loader } from "lucide-react";
 import React from "react";
 import { useOutletContext } from "react-router";
 import useSwr from "swr";
+import { COLORS } from "~/constants/colors";
 import { cn } from "~/lib/utils";
 import AnimateSection from "./animate-section";
 
@@ -29,8 +30,6 @@ type GitHubResponse = {
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
-const colors = ["#EDEAE6", "#F4D9B4", "#E8B778", "#D6923F", "#B8701F"];
-
 export default function GithuvContribution() {
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState<Contribution | null>(null);
@@ -42,16 +41,19 @@ export default function GithuvContribution() {
     onOpenChange: setOpen,
     transform: false,
     placement: "top",
-    whileElementsMounted: autoUpdate,
     middleware: [offset(4), shift()],
   });
 
   const hover = useHover(context, { delay: 0 });
+  const dismiss = useDismiss(context, { ancestorScroll: true });
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    hover,
+    dismiss,
+  ]);
 
   const { data, isLoading } = useSwr<GitHubResponse>(
-    `${import.meta.env.VITE_GITHUB_CONTRIBUTIONS_API_URL}/RikkyM?y=last`,
+    import.meta.env.VITE_GITHUB_CONTRIBUTIONS_API_URL,
     fetcher,
   );
 
@@ -142,17 +144,17 @@ export default function GithuvContribution() {
                 }}
                 className="size-3 rounded-sm"
                 style={{
-                  backgroundColor: colors[item.level],
+                  backgroundColor: COLORS[item.level],
                 }}
               />
             ))}
-            <FloatingPortal>
+            <FloatingPortal root={document.querySelector("main")}>
               <div
                 ref={refs.setFloating}
                 style={floatingStyles}
                 {...getFloatingProps()}
                 className={cn(
-                  "origin-bottom rounded-md bg-neutral-900 px-3 py-2 text-xs text-white shadow-lg transition-[opacity,scale]",
+                  "pointer-events-none origin-bottom rounded-md bg-neutral-900 px-3 py-2 text-xs text-white shadow-lg transition-[opacity,scale]",
                   open ? "scale-100" : "scale-90 opacity-0",
                 )}
               >
@@ -164,13 +166,12 @@ export default function GithuvContribution() {
         </div>
       </div>
 
-      {/* Footer */}
       <div className="mx-auto flex flex-wrap items-center justify-between gap-2.5 px-3 text-xs text-[#737373]">
         <span>{total} contributions in the past 365 days.</span>
         <div className="flex flex-1 items-center justify-end">
           <span>Less</span>
           <div className="flex items-center gap-0.5 px-0.5">
-            {colors.map((color) => (
+            {COLORS.map((color) => (
               <div
                 key={color}
                 className="size-3 rounded-sm"

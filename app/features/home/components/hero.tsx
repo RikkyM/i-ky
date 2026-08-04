@@ -7,14 +7,16 @@ const Hero = () => {
     "rounded-xl px-3 py-1.5 flex items-center gap-1.5 text-sm shadow-2xs cursor-pointer transition-colors duration-250";
 
   return (
-    <AnimateSection className="py-10">
+    <AnimateSection className="py-20">
       <div>
-        <p className="font-caveat text-2xl">Hi, I'm Rikky Mahendra</p>
-        <h1 className="text-3xl leading-none font-medium text-pretty md:text-4xl lg:text-5xl">
+        <p className="font-caveat text-2xl text-[#0A0A0A]">
+          Hi, I'm Rikky Mahendra
+        </p>
+        <h1 className="text-3xl leading-none font-medium text-pretty text-[#0A0A0A] md:text-4xl lg:text-5xl">
           Full Stack Engineer Crafting Modern Web Experiences.
         </h1>
       </div>
-      <div className="font-light text-balance xl:text-lg">
+      <div className="font-light text-balance text-[#0A0A0A] xl:text-lg">
         <p className="pt-4">
           I design and develop modern web applications that balance performance,
           scalability, and simplicity. My goal is to create digital experiences
@@ -41,7 +43,10 @@ const Hero = () => {
           href="/attachments/rikky_mahendra_resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className={cn("bg-[#E8E4E3] hover:bg-[#DBD7D6]", buttonClass)}
+          className={cn(
+            "bg-[#E8E4E3] text-[#0A0A0A] hover:bg-[#DBD7D6]",
+            buttonClass,
+          )}
         >
           <Paperclip className="size-4.5 min-w-4.5" />
           <span>Résumé</span>

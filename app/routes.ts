@@ -10,6 +10,6 @@ const pages = [index("routes/home.tsx"), route("about", "routes/about.tsx")];
 
 export default [
   ...prefix(":locale?", [
-    layout("components/layouts/main-layouts.tsx", [...pages]),
+    layout("layouts/main-layouts.tsx", [...pages]),
   ]),
 ] satisfies RouteConfig;
