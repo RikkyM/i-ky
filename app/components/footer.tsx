@@ -1,5 +1,6 @@
 import { cn } from "~/lib/utils";
 import AnimateSection from "./animate-section";
+import { MapPin } from "lucide-react";
 
 const navigations = [
   {
@@ -47,9 +48,8 @@ export default function Footer() {
           </a>
         ))}
       </div>
-      <p className="order-3 flex justify-end gap-2 text-end text-sm text-[#737373]">
-        <span className="text-base">ID</span>
-        <span>Palembang, Indonesia</span>
+      <p className="order-3 flex justify-end gap-1 text-end text-sm text-[#737373]">
+        <MapPin size={15} /><span>Palembang, Indonesia</span>
       </p>
     </AnimateSection>
   );

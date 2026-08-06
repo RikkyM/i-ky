@@ -24,7 +24,7 @@ export const MainLayout = () => {
   const outlet = useOutlet({ locale });
 
   return (
-    <main className="mx-auto h-dvh w-full scrollbar-none overflow-y-auto bg-[#FBFAF9] font-sans subpixel-antialiased">
+    <main className="mx-auto h-dvh w-full scrollbar-none overflow-x-hidden overflow-y-auto bg-[#FBFAF9] font-sans subpixel-antialiased">
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
@@ -33,7 +33,7 @@ export const MainLayout = () => {
           transition={{
             ease: "easeIn",
           }}
-          className="mx-auto max-w-3xl max-lg:w-[87%]"
+          className="mx-auto max-w-3xl max-lg:w-[87%] scrollbar-none"
         >
           <AnimateContainer>
             {outlet}

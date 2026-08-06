@@ -1,8 +1,8 @@
 import {
+  autoUpdate,
   FloatingPortal,
   offset,
   shift,
-  useDismiss,
   useFloating,
   useHover,
   useInteractions,
@@ -41,16 +41,13 @@ export default function GithuvContribution() {
     onOpenChange: setOpen,
     transform: false,
     placement: "top",
+    whileElementsMounted: autoUpdate,
     middleware: [offset(4), shift()],
   });
 
   const hover = useHover(context, { delay: 0 });
-  const dismiss = useDismiss(context, { ancestorScroll: true });
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    hover,
-    dismiss,
-  ]);
+  const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
 
   const { data, isLoading } = useSwr<GitHubResponse>(
     import.meta.env.VITE_GITHUB_CONTRIBUTIONS_API_URL,
@@ -101,6 +98,7 @@ export default function GithuvContribution() {
         <Loader className="mx-auto animate-spin" />
       </div>
     );
+
   return (
     <AnimateSection
       className={cn(
@@ -154,7 +152,7 @@ export default function GithuvContribution() {
                 style={floatingStyles}
                 {...getFloatingProps()}
                 className={cn(
-                  "pointer-events-none origin-bottom rounded-md bg-neutral-900 px-3 py-2 text-xs text-white shadow-lg transition-[opacity,scale]",
+                  "pointer-events-none origin-bottom rounded-md bg-neutral-900 px-3 py-2 text-xs whitespace-nowrap text-white shadow-lg transition-[opacity,scale]",
                   open ? "scale-100" : "scale-90 opacity-0",
                 )}
               >
