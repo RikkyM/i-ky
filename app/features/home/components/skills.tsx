@@ -3,7 +3,7 @@ import { skills } from "../data/skills";
 
 const Skills = () => {
   return (
-    <AnimateSection className="py-10">
+    <AnimateSection className="py-10" id="skills">
       <div className="space-y-2">
         <h1 className="text-2xl font-medium text-[#0A0A0A]">Skills</h1>
         <p className="text-sm font-light text-pretty text-[#0A0A0A]">

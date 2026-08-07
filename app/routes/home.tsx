@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import Indicator from "~/components/indicator-pills";
 import Hero from "~/features/home/components/hero";
 import Projects from "~/features/home/components/projects";
 import Skills from "~/features/home/components/skills";

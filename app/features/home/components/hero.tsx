@@ -7,7 +7,7 @@ const Hero = () => {
     "rounded-xl px-3 py-1.5 flex items-center gap-1.5 text-sm shadow-2xs cursor-pointer transition-colors duration-250";
 
   return (
-    <AnimateSection className="py-20">
+    <AnimateSection className="py-20" id="welcome">
       <div>
         <p className="font-caveat text-2xl text-[#0A0A0A]">
           Hi, I'm Rikky Mahendra

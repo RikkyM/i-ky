@@ -4,9 +4,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { data, useLoaderData, useLocation, useOutlet } from "react-router";
 import AnimateContainer from "~/components/animate-container";
 import Footer from "~/components/footer";
+import Indicator from "~/components/indicator-pills";
 import { cn } from "~/lib/utils";
 import type { Route } from "../+types/root";
 import BottomNavigation from "../components/navigation/bottom-navigation";
+import { INDICATORS } from "~/constants/indicators";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const locale = params.locale ?? "en";
@@ -25,6 +27,7 @@ export const MainLayout = () => {
 
   return (
     <main className="mx-auto h-dvh w-full scrollbar-none overflow-x-hidden overflow-y-auto bg-[#FBFAF9] font-sans subpixel-antialiased">
+      <Indicator indicators={INDICATORS} />
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
@@ -33,7 +36,7 @@ export const MainLayout = () => {
           transition={{
             ease: "easeIn",
           }}
-          className="mx-auto max-w-3xl max-lg:w-[87%] scrollbar-none"
+          className="mx-auto max-w-3xl scrollbar-none max-lg:w-[87%]"
         >
           <AnimateContainer>
             {outlet}

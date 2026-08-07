@@ -12,7 +12,7 @@ const Projects = () => {
     "sm:opacity-0 transition-opacity duration-250 group-hover/icon:opacity-100";
 
   return (
-    <AnimateSection className="py-10">
+    <AnimateSection className="py-10" id="projects">
       <div className="space-y-2">
         <h1 className="text-2xl font-medium text-[#0A0A0A]">Projects</h1>
         <p className="text-sm font-light text-[#0A0A0A]">
