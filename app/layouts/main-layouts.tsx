@@ -8,7 +8,6 @@ import Indicator from "~/components/indicator-pills";
 import { cn } from "~/lib/utils";
 import type { Route } from "../+types/root";
 import BottomNavigation from "../components/navigation/bottom-navigation";
-import { INDICATORS } from "~/constants/indicators";
 
 export async function loader({ params }: Route.LoaderArgs) {
   const locale = params.locale ?? "en";
@@ -26,8 +25,8 @@ export const MainLayout = () => {
   const outlet = useOutlet({ locale });
 
   return (
-    <main className="mx-auto h-dvh w-full scrollbar-none overflow-x-hidden overflow-y-auto bg-[#FBFAF9] font-sans subpixel-antialiased">
-      <Indicator indicators={INDICATORS} />
+    <main className="mx-auto relative h-dvh w-full scrollbar-none overflow-x-hidden overflow-y-auto bg-[#FBFAF9] font-sans subpixel-antialiased">
+      <Indicator />
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}

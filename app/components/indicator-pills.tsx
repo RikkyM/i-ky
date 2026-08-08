@@ -1,12 +1,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import React from "react";
 import { useLocation } from "react-router";
+import { INDICATORS } from "~/constants/indicators";
 
-export default function Indicator({
-  indicators,
-}: {
-  indicators: Record<string, Record<string, string>[]>;
-}) {
+export default function Indicator() {
   const location = useLocation();
   const [active, setActive] = React.useState("hero");
   const [hovered, setHovered] = React.useState<string | null>(null);
@@ -14,7 +11,7 @@ export default function Indicator({
   const indicatorPath = location.pathname.replace(/^\/id(?=\/|$)/, "") || "/";
 
   const getIndicators =
-    indicators[indicatorPath as keyof typeof indicators] ?? [];
+    INDICATORS[indicatorPath as keyof typeof INDICATORS] ?? [];
 
   React.useEffect(() => {
     let intersectionObserver: IntersectionObserver | null = null;
@@ -103,7 +100,7 @@ export default function Indicator({
   };
 
   return (
-    <div className="fixed top-1/2 right-5 z-10 hidden -translate-y-1/2 flex-col items-end md:flex">
+    <div className="fixed top-1/2 right-5 z-10 hidden -translate-y-1/2 items-end sm:flex-col md:flex">
       {getIndicators.map((indicator) => {
         const isActive = active === indicator.id;
         const isHovered = hovered === indicator.id;
@@ -132,7 +129,8 @@ export default function Indicator({
             <button
               type="button"
               onClick={() => scrollToSection(indicator.id)}
-              className="relative flex h-4 w-6 items-center justify-end"
+              aria-label={indicator.label}
+              className="relative flex h-6 w-6 items-center justify-end"
             >
               <motion.span
                 initial={false}
