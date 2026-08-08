@@ -12,7 +12,7 @@ const Hero = () => {
         <p className="font-caveat text-2xl text-[#0A0A0A]">
           Hi, I'm Rikky Mahendra
         </p>
-        <h1 className="text-3xl leading-none font-medium text-pretty text-[#0A0A0A] md:text-4xl lg:text-5xl">
+        <h1 className="text-3xl leading-none font-medium text-pretty text-[#0A0A0A] md:text-4xl">
           Full Stack Engineer Crafting Modern Web Experiences.
         </h1>
       </div>
