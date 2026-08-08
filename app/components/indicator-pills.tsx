@@ -11,9 +11,7 @@ export default function Indicator({
   const [active, setActive] = React.useState("hero");
   const [hovered, setHovered] = React.useState<string | null>(null);
 
-  const locale = useParams().locale ?? "en";
-
-  const loc = location.pathname.replace(/^\/id(?=\/|$)/, "");
+  const loc = location.pathname.replace(/^\/id(?=\/|$)/, "") || "/";
 
   const getIndicators = indicators[loc as keyof typeof indicators];
 
