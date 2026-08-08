@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import React from "react";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 
 export default function Indicator({
   indicators,
@@ -11,27 +11,32 @@ export default function Indicator({
   const [active, setActive] = React.useState("hero");
   const [hovered, setHovered] = React.useState<string | null>(null);
 
-  const loc = location.pathname.replace(/^\/id(?=\/|$)/, "") || "/";
+  const indicatorPath = location.pathname.replace(/^\/id(?=\/|$)/, "") || "/";
 
-  const getIndicators = indicators[loc as keyof typeof indicators];
+  const getIndicators =
+    indicators[indicatorPath as keyof typeof indicators] ?? [];
 
   React.useEffect(() => {
-    let observer: IntersectionObserver | null = null;
+    let intersectionObserver: IntersectionObserver | null = null;
+    let mutationObserver: MutationObserver | null = null;
     let cancelled = false;
 
     const setup = () => {
+      if (cancelled) return;
+
       const sections = getIndicators
         .map(({ id }) => document.getElementById(id))
         .filter((el): el is HTMLElement => Boolean(el));
 
       if (sections.length < getIndicators.length) {
-        if (!cancelled) requestAnimationFrame(setup);
         return;
       }
 
+      intersectionObserver?.disconnect();
+
       const ratios = new Map<string, number>();
 
-      observer = new IntersectionObserver(
+      intersectionObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             ratios.set(entry.target.id, entry.intersectionRatio);
@@ -55,16 +60,32 @@ export default function Indicator({
         },
       );
 
-      sections.forEach((section) => observer?.observe(section));
+      sections.forEach((section) => {
+        intersectionObserver?.observe(section);
+      });
     };
 
-    setup();
+    requestAnimationFrame(setup);
+
+    mutationObserver = new MutationObserver(() => {
+      setup();
+    });
+
+    const main = document.querySelector("main");
+
+    if (main) {
+      mutationObserver.observe(main, {
+        childList: true,
+        subtree: true,
+      });
+    }
 
     return () => {
       cancelled = true;
-      observer?.disconnect();
+      intersectionObserver?.disconnect();
+      mutationObserver?.disconnect();
     };
-  }, [location.pathname]);
+  }, [location.pathname, getIndicators]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
